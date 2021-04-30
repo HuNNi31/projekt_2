@@ -1,5 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/projekt_2.dir/main.c.obj"
+  "CMakeFiles/projekt_2.dir/student.c.obj"
   "projekt_2.exe"
   "projekt_2.exe.manifest"
   "projekt_2.lib"

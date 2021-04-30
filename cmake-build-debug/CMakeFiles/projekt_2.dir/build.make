@@ -80,17 +80,38 @@ CMakeFiles\projekt_2.dir\main.c.s: cmake_force
  /nologo $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) /FoNUL /FAs /FaCMakeFiles\projekt_2.dir\main.c.s /c C:\Users\Hunor\CLionProjects\projekt_2\main.c
 <<
 
+CMakeFiles\projekt_2.dir\student.c.obj: CMakeFiles\projekt_2.dir\flags.make
+CMakeFiles\projekt_2.dir\student.c.obj: ..\student.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Hunor\CLionProjects\projekt_2\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/projekt_2.dir/student.c.obj"
+	C:\PROGRA~2\MICROS~2\2019\COMMUN~1\VC\Tools\MSVC\1427~1.291\bin\Hostx86\x86\cl.exe @<<
+ /nologo $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) /FoCMakeFiles\projekt_2.dir\student.c.obj /FdCMakeFiles\projekt_2.dir\ /FS -c C:\Users\Hunor\CLionProjects\projekt_2\student.c
+<<
+
+CMakeFiles\projekt_2.dir\student.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/projekt_2.dir/student.c.i"
+	C:\PROGRA~2\MICROS~2\2019\COMMUN~1\VC\Tools\MSVC\1427~1.291\bin\Hostx86\x86\cl.exe > CMakeFiles\projekt_2.dir\student.c.i @<<
+ /nologo $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\Hunor\CLionProjects\projekt_2\student.c
+<<
+
+CMakeFiles\projekt_2.dir\student.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/projekt_2.dir/student.c.s"
+	C:\PROGRA~2\MICROS~2\2019\COMMUN~1\VC\Tools\MSVC\1427~1.291\bin\Hostx86\x86\cl.exe @<<
+ /nologo $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) /FoNUL /FAs /FaCMakeFiles\projekt_2.dir\student.c.s /c C:\Users\Hunor\CLionProjects\projekt_2\student.c
+<<
+
 # Object files for target projekt_2
 projekt_2_OBJECTS = \
-"CMakeFiles\projekt_2.dir\main.c.obj"
+"CMakeFiles\projekt_2.dir\main.c.obj" \
+"CMakeFiles\projekt_2.dir\student.c.obj"
 
 # External object files for target projekt_2
 projekt_2_EXTERNAL_OBJECTS =
 
 projekt_2.exe: CMakeFiles\projekt_2.dir\main.c.obj
+projekt_2.exe: CMakeFiles\projekt_2.dir\student.c.obj
 projekt_2.exe: CMakeFiles\projekt_2.dir\build.make
 projekt_2.exe: CMakeFiles\projekt_2.dir\objects1.rsp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\Hunor\CLionProjects\projekt_2\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking C executable projekt_2.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\Hunor\CLionProjects\projekt_2\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking C executable projekt_2.exe"
 	"C:\Program Files\JetBrains\CLion 2020.3.2\bin\cmake\win\bin\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\projekt_2.dir --rc=C:\PROGRA~2\WI3CF2~1\10\bin\100183~1.0\x86\rc.exe --mt=C:\PROGRA~2\WI3CF2~1\10\bin\100183~1.0\x86\mt.exe --manifests  -- C:\PROGRA~2\MICROS~2\2019\COMMUN~1\VC\Tools\MSVC\1427~1.291\bin\Hostx86\x86\link.exe /nologo @CMakeFiles\projekt_2.dir\objects1.rsp @<<
  /out:projekt_2.exe /implib:projekt_2.lib /pdb:C:\Users\Hunor\CLionProjects\projekt_2\cmake-build-debug\projekt_2.pdb /version:0.0  /machine:X86 /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib 
 <<

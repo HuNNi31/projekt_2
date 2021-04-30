@@ -4,35 +4,37 @@
 
 #ifndef PROJEKT_2_STUDENT_H
 #define PROJEKT_2_STUDENT_H
-typedef struct node {
-    int data;
-    struct Student *student;
-    struct node *right;
-    struct node *left;
-} node;
-typedef struct Student {
+
+
+#include <stdio.h>
+#include <stdlib.h>
+
+struct node {
+    int ID;
     char name[50];
+    int telefon;
     int height;
+    struct node *left;
+    struct node *right;
+};
 
 
-} Student;
+void PrintMenu();
 
-node *search(node *root, int x);
+int errorMenu(char resp);
 
-node *find_minimum(node *root);
+struct node *search(int ID, struct node *tree);
 
-node *new_node(int x);
+int is_empty(struct node *tree);
 
-node *insert(node *root, int x);
+struct node *newNode(int ID, int phone, char *name);
 
-node *delete(node *root, int x);
+struct node *insert_node(struct node *node, int Id, int phone);
 
-void inorder(node *root);
+void Preorder(struct node *tree);
 
+void Inorder(struct node *tree);
 
-int minValue(node* node);
-int findMax(node *root);
-int findMin(node* root);
-void findStudent(Student *student);
-void deleteStudent(Student *student);
+void Postorder(struct node *tree);
+
 #endif //PROJEKT_2_STUDENT_H
