@@ -154,6 +154,33 @@ main.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\projekt_2.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\projekt_2.dir\main.c.s
 .PHONY : main.c.s
 
+student.obj: student.c.obj
+
+.PHONY : student.obj
+
+# target to build an object file
+student.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\projekt_2.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\projekt_2.dir\student.c.obj
+.PHONY : student.c.obj
+
+student.i: student.c.i
+
+.PHONY : student.i
+
+# target to preprocess a source file
+student.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\projekt_2.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\projekt_2.dir\student.c.i
+.PHONY : student.c.i
+
+student.s: student.c.s
+
+.PHONY : student.s
+
+# target to generate assembly for a file
+student.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\projekt_2.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\projekt_2.dir\student.c.s
+.PHONY : student.c.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -166,6 +193,9 @@ help:
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s
+	@echo ... student.obj
+	@echo ... student.i
+	@echo ... student.s
 .PHONY : help
 
 
