@@ -7,23 +7,111 @@
 #include <stdio.h>
 #include <malloc.h>
 
-#include "student.h"
+
+void Inorder(struct node *tree) {
+    if (!(is_empty(tree))) {
+        Inorder(tree->left);
+        printf("%d ", tree->ID);
+        Inorder(tree->right);
+    }
+}
+
+void Preorder(struct node *tree) {
+    if (!(is_empty(tree))) {
+        printf("%d ", tree->ID);
+        Preorder(tree->left);
+        Preorder(tree->right);
+    }
+}
+
+void Postorder(struct node *tree) {
+    if (!(is_empty(tree))) {
+        Preorder(tree->left);
+        Preorder(tree->right);
+        printf("%d ", tree->ID);
+    }
+}
+
+void PrintMenu() {
+    int choice = 0, m, i, id, phone;
+    struct node *tree = NULL;
+    char name[MAXNAME], elem2[MAXID], elem3[MAXPHONE], n;
 
 
-struct node *newNode(int Id, int phone) {
+    printf("1......Insert students.\n");
+    printf("2......Show the id num in Preorder sort\n");
+    printf("3......Show the id num of students on Inorder sort.\n");
+    printf("4......Show the id nums of students in Postorder sort\n");
+
+
+    while (1) {
+        printf("Choose:");
+
+        scanf("%d", &choice);
+
+        switch (choice) {
+
+            case 1:
+                printf("Enter no. of students to add: ");
+                scanf("%s", &n);
+
+                m = atoi(&n);
+                for (i = 0; i < m; i++) {
+                    printf("Enter name: ");
+                    scanf("%s", &name);
+
+                    printf("Enter ID num: ");
+                    scanf("%s", &elem2);
+
+
+                    id = atoi(elem2);
+                    printf("Enter phone number: ");
+                    scanf("%s", &elem3);
+
+
+                    phone = atoi(elem3);
+                    tree = insert_node(tree, id, phone, name);
+                    printf("\n");
+                }
+                printf("\n");
+                break;
+
+
+            case 2:
+                //PreOrder
+                Preorder(tree);
+                printf("\n");
+                break;
+            case 3:
+                //InOrder.
+                Inorder(tree);
+                printf("\n");
+                break;
+            case 4:
+                //PostOrder.
+                Postorder(tree);
+                printf("\n");
+                break;
+
+        }
+    }
+}
+
+struct node *newNode(int Id, int phone, char *name) {
     struct node *node = (struct node *) malloc(sizeof(struct node));
     if (node == NULL) {
         printf("ERROR.\n Could not create a new node.");
     } else {
         strcpy(node->name, name);
         node->ID = Id;
-        node->telefon = phone;
+        node->phone = phone;
         node->left = NULL;
         node->right = NULL;
         node->height = 1;
         return (node);
     }
 }
+
 
 struct node *search(int ID, struct node *tree) {
     if (is_empty(tree)) {
@@ -38,11 +126,7 @@ struct node *search(int ID, struct node *tree) {
     }
 }
 
-
 struct node *insert_node(struct node *node, int ID, int phone, char *name) {
-    int difer_alturas;
-
-    //We insert node looking if it is greater or less than the root
     if (is_empty(node)) {
         return (newNode(ID, phone, name));
     } else if (ID > node->ID) {
@@ -53,4 +137,13 @@ struct node *insert_node(struct node *node, int ID, int phone, char *name) {
         return (node);
     }
 
+}
+
+int is_empty(struct node *tree) {
+    if (tree != NULL) {
+
+        return FALSE;
+    } else {
+        return TRUE;
+    }
 }
