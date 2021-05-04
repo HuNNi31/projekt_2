@@ -126,7 +126,43 @@ struct node *search(int ID, struct node *tree) {
     }
 }
 
+struct node *rotation_right(struct node *n2) {
+    struct node *n1 = NULL;
+    n1 = n2->left;
+    n2->left = n1->right;
+    n1->right = n2;
+    n2->height = maxi(getHeight(n2->left), getHeight(n2->right)) + 1;
+    n1->height = maxi(getHeight(n1->right), getHeight(n1->left)) + 1;
+    return (n1);
+}
+
+
+struct node *rotation_left(struct node *n2) {
+    struct node *n1 = NULL;
+    n1 = n2->right;
+    n2->right = n1->left;
+    n1->left = n2;
+    n2->height = maxi(getHeight(n2->left), getHeight(n2->right)) + 1;
+    n1->height = maxi(getHeight(n1->right), getHeight(n1->left)) + 1;
+    return (n1);
+}
+
+
+struct node *rotation_double_right(struct node *n2) {
+    n2->right = rotation_right(n2->right);
+    n2 = rotation_left(n2);
+    return (n2);
+}
+
+
+struct node *rotation_double_left(struct node *n2) {
+    n2->left = rotation_left(n2->left);
+    n2 = rotation_right(n2);
+    return (n2);
+}
+
 struct node *insert_node(struct node *node, int ID, int phone, char *name) {
+    int dif_height;
     if (is_empty(node)) {
         return (newNode(ID, phone, name));
     } else if (ID > node->ID) {
@@ -136,7 +172,21 @@ struct node *insert_node(struct node *node, int ID, int phone, char *name) {
     } else {
         return (node);
     }
-
+    node->height = 1 + maxi(getHeight(node->right), getHeight(node->left));
+    dif_height = height_diff(node);
+    if ((dif_height > 1) && (ID < node->left->ID)) {
+        return (rotation_right(node));
+    }
+    if ((dif_height > 1) && (ID > node->left->ID)) {
+        return (rotation_double_left(node));
+    }
+    if ((dif_height < -1) && (ID > node->right->ID)) {
+        return (rotation_left(node));
+    }
+    if ((dif_height < -1) && (ID < node->right->ID)) {
+        return (rotation_double_right(node));
+    }
+    return (node);
 }
 
 int is_empty(struct node *tree) {
@@ -146,4 +196,30 @@ int is_empty(struct node *tree) {
     } else {
         return TRUE;
     }
+}
+
+int getHeight(struct node *tree) {
+    if (is_empty(tree)) {
+        return 0;
+    } else {
+        return (tree->height);
+    }
+}
+
+
+int height_diff(struct node *tree) {
+    if (is_empty(tree)) {
+        return 0;
+    } else {
+        return ((getHeight(tree->left)) - (getHeight(tree->right)));
+    }
+}
+
+int maxi(int num1, int num2) {
+    int result;
+    if (num1 > num2)
+        result = num1;
+    else
+        result = num2;
+    return result;
 }
