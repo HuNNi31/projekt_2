@@ -10,6 +10,14 @@
 #define TRUE         1
 #define FALSE        0
 
+#define ERRORNUM "ERROR.\nPlease enter a number within the range.\n"
+#define ERRORNAME "ERROR.\nPlease enter a name without numbers or special characters.\n"
+#define ERRORID "ERROR.\nID number has to be 3-4nums.\n"
+#define ERRORID2 "ERROR.\nThe ID must not contain any special characters or letters\n"
+#define ERRORTEL "ERROR.\nPhone number has to be 10 numbers\n"
+#define ERRORTEL2 "ERROR.\nThe phone number must not contain any special characters or letters.\n"
+#define ERRORNODE "ERROR.\nRequested student is not in the database.\n"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "string.h"
@@ -59,5 +67,15 @@ void Inorder(struct node *tree);
 
 void Postorder(struct node *tree);
 
+
+int checkNumberinit(char k);
+
+int checkName(char *name);
+
+int checkIDnum(char *id);
+
+int checkPhoneNum(char *telf);
+
+int errorMenu(char resp);
 
 #endif //PROJEKT_2_STUDENT_H

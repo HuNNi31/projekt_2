@@ -33,68 +33,112 @@ void Postorder(struct node *tree) {
 }
 
 void PrintMenu() {
-    int choice = 0, m, i, id, phone;
+    int e, choice = 0, m, i, id, id2, phone;
     struct node *tree = NULL;
-    char name[MAXNAME], elem2[MAXID], elem3[MAXPHONE], n;
+    char name[MAXNAME], enter_id[MAXID], elem2[MAXID], elem3[MAXPHONE], resp, n;
 
 
     printf("1......Insert students.\n");
     printf("2......Show the id num in Preorder sort\n");
     printf("3......Show the id num of students on Inorder sort.\n");
     printf("4......Show the id nums of students in Postorder sort\n");
+    printf("5......Find a student by his ID.\n");
 
 
-    while (1) {
+    while (choice != 8) {
         printf("Choose:");
 
-        scanf("%d", &choice);
+        scanf("%s", &resp);
+
+
+        e = errorMenu(resp);
+        while (e == TRUE) {
+            printf(ERRORNUM);
+            scanf("%s", &resp);
+            e = errorMenu(resp);
+        }
+
+        choice = atoi(&resp);
 
         switch (choice) {
 
             case 1:
                 printf("Enter no. of students to add: ");
                 scanf("%s", &n);
-
+                while (checkNumberinit(n) == TRUE) {
+                    printf("ERROR.\nPlease enter a valid number.\n");
+                    scanf("%s", &n);
+                }
                 m = atoi(&n);
                 for (i = 0; i < m; i++) {
                     printf("Enter name: ");
                     scanf("%s", &name);
-
+                    while (checkName(name) == TRUE) {
+                        printf(ERRORNAME);
+                        scanf("%s", &name);
+                    }
                     printf("Enter ID num: ");
                     scanf("%s", &elem2);
-
-
+                    while (checkIDnum(elem2) == TRUE) {
+                        printf(ERRORID2);
+                        scanf("%s", &elem2);
+                    }
                     id = atoi(elem2);
                     printf("Enter phone number: ");
                     scanf("%s", &elem3);
-
-
+                    while (checkPhoneNum(elem3) == TRUE) {
+                        printf(ERRORTEL2);
+                        printf("\n");
+                        scanf("%s", &elem3);
+                    }
                     phone = atoi(elem3);
                     tree = insert_node(tree, id, phone, name);
                     printf("\n");
                 }
-                printf("\n");
+                printf("\n\n");
                 break;
-
 
             case 2:
-                //PreOrder
-                Preorder(tree);
-                printf("\n");
+                printf("Postorder sort: ");
+                Postorder(tree);
+                printf("\n\n");
                 break;
             case 3:
-                //InOrder.
-                Inorder(tree);
-                printf("\n");
+                printf("Preorder sort: ");
+                Preorder(tree);
+                printf("\n\n");
                 break;
             case 4:
-                //PostOrder.
-                Postorder(tree);
-                printf("\n");
+                printf("Inorder sort: ");
+                Inorder(tree);
+                printf("\n\n");
+                break;
+            case 5:
+                printf("Enter ID num: ");
+                scanf("%s", &enter_id);
+
+                while (checkIDnum(enter_id) == TRUE) {
+                    printf(ERRORID2);
+                    scanf("%s", &enter_id);
+                }
+                id2 = atoi(enter_id);
+                struct node *search_node = search(id2, tree);
+                if (search_node == NULL) {
+                    printf(ERRORNODE);
+                } else {
+                    printf("ID %d and name: %s\n", search_node->ID, search_node->name);
+                    printf("Name %s and phone number: %d\n\n", search_node->name, search_node->phone);
+                }
                 break;
 
+            default:
+                printf(ERRORNUM);
+                printf("\n");
+                break;
         }
     }
+
+    free(tree);
 }
 
 struct node *newNode(int Id, int phone, char *name) {
@@ -222,4 +266,82 @@ int maxi(int num1, int num2) {
     else
         result = num2;
     return result;
+}
+
+int checkName(char *name) {
+    int i = 0, error;
+    while (name[i] != '\0') {
+        if (((65 <= name[i]) && (name[i] < 91)) || ((97 <= name[i]) && (name[i] < 123))) {
+            error = FALSE;
+        } else {
+            error = TRUE;
+            break;
+        }
+        i++;
+    }
+    return error;
+}
+
+
+int checkIDnum(char *id) {
+    int i = 0, error, cont = 0;
+    while (id[i] != '\0') {
+        if ((48 <= id[i]) && (id[i] < 58)) {
+            error = FALSE;
+            cont++;
+        } else {
+            error = TRUE;
+            break;
+        }
+        i++;
+    }
+
+    if ((cont > 4) || (cont < 3)) {
+        error = TRUE;
+        printf(ERRORID);
+    }
+
+    return error;
+}
+
+
+int checkPhoneNum(char *phone) {
+    int i = 0, error, cont = 0;
+    while (phone[i] != '\0') {
+        if ((48 <= phone[i]) && (phone[i] < 58)) {
+            error = FALSE;
+            cont++;
+        } else {
+            error = TRUE;
+            break;
+        }
+        i++;
+    }
+
+    if ((cont > 10) || (cont < 10)) {
+        error = TRUE;
+        printf(ERRORTEL);
+    }
+
+    return error;
+}
+
+
+int checkNumberinit(char k) {
+    int error;
+    if ((48 <= k) && (k < 58)) {
+        error = FALSE;
+    } else {
+        error = TRUE;
+    }
+    return error;
+}
+
+int errorMenu(char resp) {
+
+    if ((48 <= resp) && (resp < 58)) {
+        return FALSE;
+    } else {
+        return TRUE;
+    }
 }
