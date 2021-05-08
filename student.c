@@ -60,7 +60,7 @@ void PrintMenu() {
     printf("6......Delete a student by his ID.\n");
 
 
-    while (choice != 6) {
+    while (choice != 8) {
         printf("Choose:");
 
         scanf("%s", &resp);
