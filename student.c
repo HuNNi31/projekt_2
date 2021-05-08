@@ -53,14 +53,14 @@ void PrintMenu() {
 
 
     printf("1......Insert students.\n");
-    printf("2......Show the id num in Postorder sort\n");
-    printf("3......Show the id num of students on Preorder sort.\n");
-    printf("4......Show the id nums of students in Inorder sort\n");
+    printf("2......Show the id numbers in Postorder sort.\n");
+    printf("3......Show the id numbers in Preorder sort.\n");
+    printf("4......Show the id numbers in Inorder sort.\n");
     printf("5......Find a student by his ID.\n");
     printf("6......Delete a student by his ID.\n");
 
 
-    while (choice != 8) {
+    while (choice != 7) {
         printf("Choose:");
 
         scanf("%s", &resp);
