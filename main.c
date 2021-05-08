@@ -1,10 +1,10 @@
 
 #include "student.h"
 
-    int main() {
-        PrintMenu();
+int main() {
+    PrintMenu();
     return 0;
-    }
+}
 
 
 

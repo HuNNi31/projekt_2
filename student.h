@@ -78,4 +78,8 @@ int checkPhoneNum(char *telf);
 
 int errorMenu(char resp);
 
+struct node *minValueNode(struct node *node);
+
+struct node *deleteNode(struct node *tree, int ID);
+
 #endif //PROJEKT_2_STUDENT_H

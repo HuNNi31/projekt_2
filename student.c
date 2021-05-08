@@ -7,7 +7,10 @@
 #include <stdio.h>
 #include <malloc.h>
 
-
+/**
+ * Prints the tree in Inorder
+ * @param tree given tree
+ */
 void Inorder(struct node *tree) {
     if (!(is_empty(tree))) {
         Inorder(tree->left);
@@ -16,6 +19,10 @@ void Inorder(struct node *tree) {
     }
 }
 
+/**
+ * Prints the tree in Preorder
+ * @param tree given tree
+ */
 void Preorder(struct node *tree) {
     if (!(is_empty(tree))) {
         printf("%d ", tree->ID);
@@ -24,6 +31,10 @@ void Preorder(struct node *tree) {
     }
 }
 
+/**
+ * Prints the tree in postorder
+ * @param tree given tree
+ */
 void Postorder(struct node *tree) {
     if (!(is_empty(tree))) {
         Preorder(tree->left);
@@ -32,6 +43,9 @@ void Postorder(struct node *tree) {
     }
 }
 
+/**
+ * Prints the user interface
+ */
 void PrintMenu() {
     int e, choice = 0, m, i, id, id2, phone;
     struct node *tree = NULL;
@@ -39,13 +53,14 @@ void PrintMenu() {
 
 
     printf("1......Insert students.\n");
-    printf("2......Show the id num in Preorder sort\n");
-    printf("3......Show the id num of students on Inorder sort.\n");
-    printf("4......Show the id nums of students in Postorder sort\n");
+    printf("2......Show the id num in Postorder sort\n");
+    printf("3......Show the id num of students on Preorder sort.\n");
+    printf("4......Show the id nums of students in Inorder sort\n");
     printf("5......Find a student by his ID.\n");
+    printf("6......Delete a student by his ID.\n");
 
 
-    while (choice != 8) {
+    while (choice != 6) {
         printf("Choose:");
 
         scanf("%s", &resp);
@@ -130,6 +145,16 @@ void PrintMenu() {
                     printf("Name %s and phone number: %d\n\n", search_node->name, search_node->phone);
                 }
                 break;
+            case 6:
+                printf("Enter Student ID to delete: ");
+                scanf("%s", &enter_id);
+                while (checkIDnum(enter_id) == TRUE) {
+                    printf(ERRORID2);
+                    scanf("%s", &enter_id);
+                }
+                id2 = atoi(enter_id);
+                tree = deleteNode(tree, id2);
+                break;
 
             default:
                 printf(ERRORNUM);
@@ -141,6 +166,13 @@ void PrintMenu() {
     free(tree);
 }
 
+/**
+ * Creates a new node
+ * @param Id of the new node
+ * @param phone of the new node
+ * @param name of the new node
+ * @return new node
+ */
 struct node *newNode(int Id, int phone, char *name) {
     struct node *node = (struct node *) malloc(sizeof(struct node));
     if (node == NULL) {
@@ -156,7 +188,12 @@ struct node *newNode(int Id, int phone, char *name) {
     }
 }
 
-
+/**
+ * Searching the node by given ID
+ * @param ID of searched node
+ * @param tree where we search
+ * @return found node
+ */
 struct node *search(int ID, struct node *tree) {
     if (is_empty(tree)) {
         return NULL;
@@ -170,6 +207,11 @@ struct node *search(int ID, struct node *tree) {
     }
 }
 
+/**
+ * Rotates the node to the right side
+ * @param n2 node
+ * @return rotated node
+ */
 struct node *rotation_right(struct node *n2) {
     struct node *n1 = NULL;
     n1 = n2->left;
@@ -180,7 +222,11 @@ struct node *rotation_right(struct node *n2) {
     return (n1);
 }
 
-
+/**
+ * Rotates the node to the left side
+ * @param n2 node
+ * @return rotated node
+ */
 struct node *rotation_left(struct node *n2) {
     struct node *n1 = NULL;
     n1 = n2->right;
@@ -191,20 +237,36 @@ struct node *rotation_left(struct node *n2) {
     return (n1);
 }
 
-
+/**
+ * Rotates the node to the right side twice
+ * @param n2 node
+ * @return rotated node
+ */
 struct node *rotation_double_right(struct node *n2) {
     n2->right = rotation_right(n2->right);
     n2 = rotation_left(n2);
     return (n2);
 }
 
-
+/**
+ * Rotates the node to the left side twice
+ * @param n2 node
+ * @return rotated node
+ */
 struct node *rotation_double_left(struct node *n2) {
     n2->left = rotation_left(n2->left);
     n2 = rotation_right(n2);
     return (n2);
 }
 
+/**
+ * Inserts a new node to the tree
+ * @param node tree to be inserted in
+ * @param ID of the new node
+ * @param phone of the new node
+ * @param name of the new node
+ * @return new tree
+ */
 struct node *insert_node(struct node *node, int ID, int phone, char *name) {
     int dif_height;
     if (is_empty(node)) {
@@ -233,6 +295,11 @@ struct node *insert_node(struct node *node, int ID, int phone, char *name) {
     return (node);
 }
 
+/**
+ * Checks if the given tree is empty
+ * @param tree given tree
+ * @return TRUE or FALSE
+ */
 int is_empty(struct node *tree) {
     if (tree != NULL) {
 
@@ -242,6 +309,11 @@ int is_empty(struct node *tree) {
     }
 }
 
+/**
+ * Returns the height of the node
+ * @param tree given
+ * @return height
+ */
 int getHeight(struct node *tree) {
     if (is_empty(tree)) {
         return 0;
@@ -250,7 +322,11 @@ int getHeight(struct node *tree) {
     }
 }
 
-
+/**
+ * Returns the difference between left and right nodes
+ * @param tree given tree
+ * @return difference
+ */
 int height_diff(struct node *tree) {
     if (is_empty(tree)) {
         return 0;
@@ -259,6 +335,12 @@ int height_diff(struct node *tree) {
     }
 }
 
+/**
+ * Finds the bigger number
+ * @param num1
+ * @param num2
+ * @return bigger number
+ */
 int maxi(int num1, int num2) {
     int result;
     if (num1 > num2)
@@ -268,6 +350,11 @@ int maxi(int num1, int num2) {
     return result;
 }
 
+/**
+ * Checks if given name contains only letters based on ASCII
+ * @param name input string
+ * @return TRUE or FALSE
+ */
 int checkName(char *name) {
     int i = 0, error;
     while (name[i] != '\0') {
@@ -282,7 +369,11 @@ int checkName(char *name) {
     return error;
 }
 
-
+/**
+ * Confirms if given id is valid with 3 or 4 characters
+ * @param id given string
+ * @return TRUE or FALSE
+ */
 int checkIDnum(char *id) {
     int i = 0, error, cont = 0;
     while (id[i] != '\0') {
@@ -304,7 +395,11 @@ int checkIDnum(char *id) {
     return error;
 }
 
-
+/**
+ * Validates phone number
+ * @param phone given string
+ * @return TRUE or FALSE
+ */
 int checkPhoneNum(char *phone) {
     int i = 0, error, cont = 0;
     while (phone[i] != '\0') {
@@ -326,7 +421,11 @@ int checkPhoneNum(char *phone) {
     return error;
 }
 
-
+/**
+ * Check if input is a number based on ASCII
+ * @param k given input
+ * @return TRUE or FALSE
+ */
 int checkNumberinit(char k) {
     int error;
     if ((48 <= k) && (k < 58)) {
@@ -337,6 +436,11 @@ int checkNumberinit(char k) {
     return error;
 }
 
+/**
+ * Menu handles typos
+ * @param resp given input
+ * @return TRUE or FALSE
+ */
 int errorMenu(char resp) {
 
     if ((48 <= resp) && (resp < 58)) {
@@ -345,3 +449,59 @@ int errorMenu(char resp) {
         return TRUE;
     }
 }
+
+/**
+ * Returns the smallest node
+ * @param node given tree of nodes
+ * @return smallest node
+ */
+struct node *minValueNode(struct node *node) {
+    struct node *current = node;
+
+    /* loop down to find the leftmost leaf */
+    while (current && current->left != NULL)
+        current = current->left;
+
+    return current;
+}
+
+/**
+ * Deletes a node from the tree based on given ID
+ * @param tree containing the nodes
+ * @param ID of the student
+ * @return the new tree
+ */
+struct node *deleteNode(struct node *tree, int ID) {
+    // base case
+    if (is_empty(tree)) {
+        return NULL;
+    }
+
+    if (ID > tree->ID)
+
+        tree->right = deleteNode(tree->right, ID);
+    else if (ID < tree->ID)
+
+        tree->left = deleteNode(tree->left, ID);
+    else {
+
+        if (tree->left == NULL && tree->right == NULL) {
+            free(tree);
+            return NULL;
+        } else if (tree->left == NULL || tree->right == NULL) {
+            struct node *temp;
+            if (tree->left == NULL)
+                temp = tree->right;
+            else
+                temp = tree->left;
+            free(tree);
+            return temp;
+        } else {
+            struct node *temp = minValueNode(tree->right);
+            tree->ID = temp->ID;
+            tree->right = deleteNode(tree->right, temp->ID);
+        }
+    }
+    return tree;
+}
+
